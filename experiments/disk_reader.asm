@@ -17,10 +17,8 @@ disk_error :
 ; Jump if error (i.e. carry flag set)
 ; Restore DX from the stack
 ; if AL (sectors read) != DH (sectors expected) ; display error message
-	int 0x10
-	mov bx, DISK_ERROR_MSG 
-	call print_string
-
+	mov ax, 0xA2
+	call print_hex
 	jmp $
 ; Variables
 DISK_ERROR_MSG db "Disk read error!", 0
@@ -28,6 +26,7 @@ DISK_ERROR_MSG db "Disk read error!", 0
 jmp KERNEL_OFFSET
 
 %include "../print_string.asm"
+%include "../print_hex.asm"
 times 510-($-$$) db 0 
 dw 0xaa55
 
