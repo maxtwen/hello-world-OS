@@ -33,8 +33,8 @@ print_hex:
 	loop .reverse
 	mov bx, HEX_OUT
 	call print_string
-	pusha
-	pushf
+	popa
+	popf
 	ret
 
-HEX_OUT: db "00", 0
+HEX_OUT: db "0000", 0
